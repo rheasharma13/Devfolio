@@ -7,7 +7,7 @@
     "start": "node server",
     "server": "nodemon server"
   },
-  "author": "Rhea sharma",
+  "author": "Rhea Sharma",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.0",

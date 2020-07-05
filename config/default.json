@@ -1,0 +1,3 @@
+{
+    "mongoURI":"mongodb+srv://rhea13:rhea130201@cluster0.x2bz5.mongodb.net/dev_connector?retryWrites=true&w=majority"
+}
