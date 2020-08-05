@@ -3,6 +3,8 @@ const router = require('express').Router();
 const User=require('../../models/User.js');
 const gravatar=require('gravatar');
 const bcrypt=require('bcrypt')
+const config=require('config')
+const jwt=require('jsonwebtoken')
 const {check,validationResult}=require('express-validator')
  //@route POST /api/users
  //@desc Register a user
@@ -52,18 +54,29 @@ const {check,validationResult}=require('express-validator')
       });
 
      await user.save();
+      //return json web token
+     const payload=
+     {
+         user:
+         {
+             id:user.id
+         }
+     }
+
+     jwt.sign(payload,
+        config.get('jwtSecret'),
+        {expiresIn:360000},
+        (err,token) => {
+            if(err) throw err;
+            res.json({token});
+        });
      console.log(user);
-
-     //Return JSON Web Token
-
-     res.send('User registered');
-
      
 
   }catch(err)
   {
     console.error(err.message)
-    res.status(500).send('Server error')
+    res.status(500).send('Server error');
   }
 
      
