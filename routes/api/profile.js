@@ -32,7 +32,7 @@ router.get('/me', auth, async (req, res) => {
 router.post('/',[auth,[
 check('status','Status is required').not().isEmpty(),
 check('skills','Skills are required').not().isEmpty(),
-check('handle','Handle is required').not().isEmpty()
+
 ]
 ] ,async (req,res)=>
 {
@@ -40,7 +40,7 @@ check('handle','Handle is required').not().isEmpty()
     if(!errors.isEmpty()) res.status(400).json({errors:errors.array()});
     const profileFields = {};
     profileFields.user = req.user.id;
-    if (req.body.handle) profileFields.handle = req.body.handle;
+   
     if (req.body.company) profileFields.company = req.body.company;
     if (req.body.website) profileFields.website = req.body.website;
     if (req.body.location) profileFields.location = req.body.location;
@@ -79,6 +79,7 @@ check('handle','Handle is required').not().isEmpty()
         }
             profile=new Profile(profileFields);
             await profile.save();
+            console.log(profile);
             res.json(profile);
 
     }
@@ -123,7 +124,7 @@ router.get("/user/:userid",async (req,res) =>
         const prof=await Profile.findOne({user:req.params.userid}).populate("user",["name","avatar"]);
         if(!prof)
         return res.status(400).json({msg:"Profile not available for this user"});
-
+        console.log(prof);
         res.json(prof);
     }catch(err)
     {
@@ -164,7 +165,7 @@ router.put("/experience",[auth,
     [
         check("title","Title is required").not().isEmpty(),
         check("company","Company is required").not().isEmpty(),
-        check("from","From Date is required").not().isEmpty()
+        
 
     ]
 ], async(req,res) =>

@@ -172,11 +172,11 @@ router.put("/unlike/:postid",auth,async (req,res)=>
     }
 })
 
-//@route POST api/posts/comment/:postid
+//@route PUT api/posts/comment/:postid
 //@desc Comment on a post
 //@access Private
 
-router.put('/comment/:postid', [auth,
+router.post('/comment/:postid', [auth,
     [check("text","Text is required").not().isEmpty()] 
  ],
  async (req, res) => {
@@ -201,7 +201,7 @@ router.put('/comment/:postid', [auth,
 
          post.comments.unshift(newComment);
 
-         await post.save;
+         await post.save();
          
          res.json(post);
  
@@ -213,7 +213,37 @@ router.put('/comment/:postid', [auth,
      }
  
  });
+
+//@route DELETE api/posts/comment/:postid/:commentid
+//@desc Delete comment
+//@access Private
  
+router.delete("/comment/:postid/:commentid",auth, async (req,res)=>{
+    try {
+
+        const post=await Post.findById(req.params.postid);
+        
+
+        const comment=post.comments.find(comment => comment.id===req.params.commentid);
+        
+        if(!comment)
+        return res.status(400).json({msg:"Comment does not exist"});
+
+        if(req.user.id !==comment.user.toString())
+        return res.status(401).json({msg:"User not authorized"});
+        
+        const removeidx= post.comments.map(comment => comment.user.toString()).indexOf(req.user.id);
+
+        post.comments.splice(removeidx,1);
+
+        await post.save();
+
+        res.json(post.comments);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send("Server error");    
+    }
+})
 
 
 module.exports=router;
