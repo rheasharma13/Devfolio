@@ -10,13 +10,13 @@ const DashboardActions = () => {
     <span class='dash-buttons'>
     
       <Link to='/edit-profile' class=''>
-       <button className='btn btn-primary'><i class='fas fa-user-circle text-light' /> Edit Profile</button> 
+       <button className='btn btn-primary ' ><i class='fas fa-user-circle text-light' /> Edit Profile</button> 
       </Link>
       <Link to='/add-experience' class=''>
-        <button className='btn btn-info'><i class='fab fa-black-tie text-primary' /> Add Experience</button>
+        <button className='btn btn-info my-1'><i class='fab fa-black-tie text-primary' /> Add Experience</button>
       </Link>
       <Link to='/add-education' class=''>
-       <button className="btn btn-primary"><i class='fas fa-graduation-cap text-light' /> Add Education</button> 
+       <button className="btn btn-primary "><i class='fas fa-graduation-cap text-light' /> Add Education</button> 
       </Link>
     </span>
   );

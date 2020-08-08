@@ -31,7 +31,7 @@ const Dashboard = ({
         <Fragment>
           
           <Link to={`/profile/${user._id}`} class=''>
-        <button className="btn btn-info"><i class='fas fa-user-circle text-primary ' /> View Profile</button>
+        <button className="btn btn-info my-1"><i class='fas fa-user-circle text-primary ' /> View Profile</button>
         <DashboardActions />
       </Link>
           <Experience experience={profile.experience} />

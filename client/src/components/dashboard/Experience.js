@@ -17,14 +17,15 @@ const Experience = ({ experience, deleteExperience }) => {
           <Moment format='YYYY/MM/DD'>{exp.to}</Moment>
         )}
       </td>
-      <td>
+      
+        <p>
         <button
           onClick={() => deleteExperience(exp._id)}
           className='btn btn-danger'
         >
           Delete
-        </button>
-      </td>
+        </button></p>
+      
     </tr>
   ));
 
