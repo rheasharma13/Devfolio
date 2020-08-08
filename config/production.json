@@ -1,6 +1,0 @@
-{
-    "mongoURI":"mongodb+srv://rhea13:rhea130201@cluster0.x2bz5.mongodb.net/devfolio?retryWrites=true&w=majority",
-    "jwtSecret":"RheaSharma",
-    "githubClientId":"ffeb7f9e9e2d19fa1446",
-    "githubSecret":"31f69e6440f5a9852decf9ec4faaab57632d1204"
-}
