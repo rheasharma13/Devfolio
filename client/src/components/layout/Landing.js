@@ -16,16 +16,16 @@ const Landing = ({ isAuthenticated }) => {
           <p className='lead'>
             Level up your networking game with DevFolio.</p>
             <p className='lead'>
-            Create your Portfolio, Showcase your Skills and Engage with other Developers.</p>
+            Create your Portfolio, Showcase your Skills and Engage with other Developers. Please login/register to view detailed profiles of users and their posts.</p>
 
           <div className='buttons'>
-            <Link to='/register' className='btn btn-primary'>
+            <Link to='/register' className='btn btn-primary m-1'>
               Sign Up
             </Link>
-            <Link to='/login' className='btn btn-light'>
+            <Link to='/login' className='btn btn-light m-1'>
               Login
             </Link>
-            <Link to='/profiles' className='btn btn-primary'>
+            <Link to='/profiles' className='btn btn-primary m-1'>
               Developers
             </Link>
             

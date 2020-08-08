@@ -4,6 +4,10 @@ const auth=require('../../middleware/auth');
 const User=require('../../models/User');
 const Profile=require('../../models/Profile');
 const {check,validationResult} =require('express-validator');
+const express = require('express');
+const config=require('config');
+const request=require('request');
+
 
 //@route GET api/profile/me
 //@desc Get profile of user
@@ -76,6 +80,8 @@ check('skills','Skills are required').not().isEmpty(),
                 },
                 {new:true}
             );
+
+           return res.json(prof);
         }
             profile=new Profile(profileFields);
             await profile.save();
@@ -124,7 +130,7 @@ router.get("/user/:userid",async (req,res) =>
         const prof=await Profile.findOne({user:req.params.userid}).populate("user",["name","avatar"]);
         if(!prof)
         return res.status(400).json({msg:"Profile not available for this user"});
-        console.log(prof);
+        
         res.json(prof);
     }catch(err)
     {
@@ -303,6 +309,38 @@ router.delete("/education/:expid",auth,async (req,res)=>
         res.status(500).send("Server error");
         
     }
+})
+
+//@route GET api/profile/github/:username
+//@desc Get Github Repos
+//@access Public
+
+router.get("/github/:username",(req,res)=>
+{
+    try
+    {
+        const options={
+            uri:`https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.get('githubClientId')}&client_secret=${config.get('githubSecret')}`,
+            method:'GET',
+            headers:{'user-agent':'node.js'}
+        }
+        request(options,(error,response,body)=>{
+            if(error) console.log(error);
+            if(response.statusCode!==200)
+            {
+                return res.status(404).json({msg:'No Github profile found'});
+            }
+            return res.json(JSON.parse(body));
+    
+        });
+
+    }catch(error)
+    {
+        console.log(error.message);
+        res.status(500).send("Server error");
+    }
+
+    
 })
 
 module.exports=router;

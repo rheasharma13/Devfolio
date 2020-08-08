@@ -27,7 +27,7 @@ const Dashboard = ({
         <i className='fas fa-user' /> Welcome {user && user.name}
       </p>
       
-      {profile !== null ? (
+      {profile !== null && user!==null ? (
         <Fragment>
           
           <Link to={`/profile/${user._id}`} class=''>

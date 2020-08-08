@@ -20,7 +20,7 @@ const Profile = ({
   useEffect(() => {
     getProfileById(match.params.id);
   }, [getProfileById, match.params.id]);
-
+  console.log(profile)
   return (
     <Fragment>
       {profile === null || loading ? (
@@ -37,6 +37,8 @@ const Profile = ({
                 Edit Profile
               </Link>
             )}
+            
+              
           <div className='profile-grid my-1'>
             <ProfileTop profile={profile} />
             <ProfileAbout profile={profile} />
