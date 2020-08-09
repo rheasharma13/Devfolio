@@ -1,4 +1,4 @@
-# Dev Connector
+# DevFolio
 
 A MERN Stack Application for Developers to create their Portfolio and engage with other developers through posts and discussions.
 
